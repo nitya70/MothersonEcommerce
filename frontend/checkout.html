@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+</head>
+<body>
+
+<h1>Checkout</h1>
+
+<form id="checkoutForm">
+
+    <input type="text" id="fullName" placeholder="Full Name" required>
+
+    <input type="email" id="email" placeholder="Email" required>
+
+    <input type="text" id="phoneNumber" placeholder="Phone Number" required>
+
+    <input type="text" id="addressLine1" placeholder="Address" required>
+
+    <input type="text" id="city" placeholder="City" required>
+
+    <input type="text" id="state" placeholder="State" required>
+
+    <input type="text" id="pincode" placeholder="Pincode" required>
+
+    <select id="paymentMethod">
+
+        <option value="COD">
+            Cash On Delivery
+        </option>
+
+        <option value="UPI">
+            UPI
+        </option>
+
+    </select>
+
+    <button type="submit">
+        Place Order
+    </button>
+
+</form>
+
+<script src="js/checkout.js"></script>
+
+</body>
+</html>

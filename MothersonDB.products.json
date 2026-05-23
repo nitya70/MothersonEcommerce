@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "69c4c86408976e44d88a2434"
+  },
+  "name": "Sec Sixty",
+  "price": 55000,
+  "image": "https://images.jdmagicbox.com/comp/noida/p3/011pxx11.xx11.000192337378.d2p3/catalogue/motherson-sumi-systems-pvt-ltd-sec-sixty-noida-ho-noida-automobile-accessory-dealers-1b7qbi3-250.jpg"
+},
+{
+  "_id": {
+    "$oid": "69c4c8d708976e44d88a2436"
+  },
+  "name": "Auto Part ms012fl strut ",
+  "price": 2000,
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBFt_NRz10vGzN8eRv-G3aodCc_JSv1bcK6Q&s"
+},
+{
+  "_id": {
+    "$oid": "69c4c90508976e44d88a2438"
+  },
+  "name": "Laptop",
+  "price": 55000,
+  "image": "https://m.media-amazon.com/images/I/71jG+e7roXL.jpg"
+},
+{
+  "_id": {
+    "$oid": "69c4c91c08976e44d88a243a"
+  },
+  "name": "Headphones",
+  "price": 2000,
+  "image": "https://m.media-amazon.com/images/I/61CGHv6kmWL.jpg"
+},
+{
+  "_id": {
+    "$oid": "69c4c92808976e44d88a243c"
+  },
+  "name": "Smartphone",
+  "price": 25000,
+  "image": "https://m.media-amazon.com/images/I/71xb2xkN5qL.jpg"
+},
+{
+  "_id": {
+    "$oid": "69c4c93408976e44d88a243e"
+  },
+  "name": "Smart Watch",
+  "price": 4000,
+  "image": "https://m.media-amazon.com/images/I/61y2VVWcGBL.jpg"
+},
+{
+  "_id": {
+    "$oid": "69c4ccd008976e44d88a2441"
+  },
+  "name": "Automotive Part",
+  "price": 55000,
+  "image": "https://www.motherson.com/storage/SsLZYcUj8XgBfuRCr7Vn1CgZFmwdpn2VP0lRNvZf-326x180.jpeg?token=271724a31bb79d4b991f4543af89c39c"
+},
+{
+  "_id": {
+    "$oid": "69c4cd1008976e44d88a2443"
+  },
+  "name": "Wire Harness",
+  "price": 2200,
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6W96wdUVNsNE5GZlwrP9lvZSKiMySKLRzhg&s"
+},
+{
+  "_id": {
+    "$oid": "69c4cd5608976e44d88a2446"
+  },
+  "name": "Car Component",
+  "price": 1800,
+  "image": "https://www.motherson.com/storage/gob2j0ht0rQuUTrvVNYLxw4YJ7PhsDs7ieMCprjp-326x180.jpeg?token=c60095458620e78037e5660c50409a24"
+},
+{
+  "_id": {
+    "$oid": "69c4cd9a08976e44d88a2449"
+  },
+  "name": "Sensor Module",
+  "price": 5500,
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfnR8zvd7s88GXvzgCMBTxD2q46rqsLFaybQ&s"
+}]

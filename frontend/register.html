@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Register</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI', sans-serif;
+background:linear-gradient(135deg,#0f172a,#1e293b,#020617);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.card{
+
+width:380px;
+padding:40px;
+
+background: rgba(255,255,255,0.08);
+border-radius:15px;
+
+backdrop-filter: blur(10px);
+
+box-shadow:0 8px 32px rgba(0,0,0,0.4);
+
+color:white;
+}
+
+h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:none;
+border-radius:8px;
+background:rgba(255,255,255,0.1);
+color:white;
+}
+
+input::placeholder{
+color:#cbd5f5;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:linear-gradient(90deg,#6366f1,#8b5cf6);
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:0.9;
+}
+
+.link{
+text-align:center;
+margin-top:15px;
+}
+
+a{
+color:#8b5cf6;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Create Account</h2>
+
+<form>
+
+<input type="text" id="name" placeholder="Name"><br><br>
+
+<input type="email" id="email" placeholder="Email"><br><br>
+
+<input type="password" id="password" placeholder="Password"><br><br>
+
+<input type="text" id="phone" placeholder="Phone"><br><br>
+
+<input type="text" id="address" placeholder="Address"><br><br>
+
+<button type="button" onclick="register()">
+    Register
+</button>
+
+
+</form>
+
+<div class="link">
+Already have account? <a href="login.html">Login</a>
+</div>
+
+</div>
+
+<script src="js/register.js"></script>
+</body>
+</html>
