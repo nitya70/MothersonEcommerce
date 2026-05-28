@@ -1,92 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-<title>Motherson Product Store</title>
 
-<style>
+<meta charset="UTF-8">
 
-body{
-font-family: Arial;
-margin:0;
-background:#f4f4f4;
-}
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-.header{
-background:black;
-color:white;
-text-align:center;
-padding:15px;
-font-size:22px;
-}
+<title>Motherson Store</title>
 
-#products{
-display:grid;
-grid-template-columns: repeat(4,1fr);
-gap:20px;
-padding:30px;
-}
+<link rel="stylesheet"
+      href="css/header.css">
 
-.product-card{
-background:white;
-border-radius:10px;
-padding:15px;
-text-align:center;
-box-shadow:0px 0px 8px rgba(0,0,0,0.2);
-}
-
-.product-card img{
-width:200px;
-height:150px;
-object-fit:contain;
-}
-
-.product-card h3{
-font-size:18px;
-margin:10px 0;
-}
-
-.price{
-color:green;
-font-size:18px;
-font-weight:bold;
-}
-
-.rating{
-color:orange;
-}
-
-button{
-background:black;
-color:white;
-border:none;
-padding:10px;
-margin-top:10px;
-cursor:pointer;
-border-radius:5px;
-}
-
-button:hover{
-background:#444;
-}
-
-</style>
+<link rel="stylesheet"
+      href="css/products.css">
 
 </head>
+<style>
+.wishlist-icon{
+
+    position:absolute;
+
+    top:15px;
+    right:15px;
+
+    font-size:24px;
+
+    cursor:pointer;
+}
+.view-btn{
+
+    flex:1;
+
+    padding:10px;
+
+    border:none;
+
+    border-radius:8px;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.view-btn{
+
+    background:#2563eb;
+}
+.view-btn:hover{
+
+    background:#1d4ed8;
+}
+</style>
 
 <body>
 
-<div class="header">
-Motherson Product Store
+<div id="header"></div>
+
+<!-- CONTROLS -->
+
+<div class="controls">
+
+    <div class="search-box">
+
+        <input type="text"
+               id="searchInput"
+               placeholder="Search Products..."
+               onkeyup="searchProducts()">
+
+    </div>
+
+    <div class="filter-group">
+
+        <select id="priceFilter"
+                onchange="filterProducts()">
+
+            <option value="all">
+                All Prices
+            </option>
+
+            <option value="low">
+                Below ₹500
+            </option>
+
+            <option value="medium">
+                ₹500 - ₹2000
+            </option>
+
+            <option value="high">
+                Above ₹2000
+            </option>
+
+        </select>
+
+        <select id="sortFilter"
+                onchange="sortProducts()">
+
+            <option value="default">
+                Sort By
+            </option>
+
+            <option value="lowToHigh">
+                Price Low To High
+            </option>
+
+            <option value="highToLow">
+                Price High To Low
+            </option>
+
+        </select>
+
+    </div>
+
 </div>
 
-<div id="products">
+<!-- PRODUCTS -->
 
-</div>
+<div id="products"></div>
 
-<script src="js/script.js"></script>
+<!-- LOAD HEADER -->
+
 <script>
-loadProducts()
+
+fetch("./header.html")
+.then(response => response.text())
+.then(data => {
+
+    document.getElementById("header")
+            .innerHTML = data;
+    updateCartCount();
+    updateWishlistCount();
+});
+
 </script>
+
+<script src="js/header.js"></script>
+
+<script src="js/product.js"></script>
+
 </body>
+
 </html>

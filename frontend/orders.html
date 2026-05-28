@@ -1,15 +1,107 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Orders</title>
+
+<title>Orders</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f3f4f6;
+    padding:20px;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+#ordersContainer{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(250px,1fr));
+
+    gap:20px;
+}
+
+.card{
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card img{
+
+    width:100%;
+    height:200px;
+
+    object-fit:contain;
+}
+
+.price{
+
+    color:green;
+
+    font-size:20px;
+
+    font-weight:bold;
+}
+
+</style>
+
 </head>
+
 <body>
 
-<h1>My Orders</h1>
+<h1>
+    📦 Ordered Products
+</h1>
 
 <div id="ordersContainer"></div>
 
-<script src="js/orders.js"></script>
+<script>
+
+const orders =
+    JSON.parse(
+        localStorage.getItem("orders")
+    ) || [];
+
+const container =
+    document.getElementById(
+        "ordersContainer"
+    );
+
+orders.forEach(product => {
+
+    container.innerHTML += `
+
+        <div class="card">
+
+            <img src="${product.image}"
+                 alt="${product.productname}">
+
+            <h2>
+                ${product.productname}
+            </h2>
+
+            <p class="price">
+                ₹${product.price}
+            </p>
+
+        </div>
+    `;
+});
+
+</script>
 
 </body>
+
 </html>

@@ -1,10 +1,14 @@
 package com.motherson.repository;
-import com.motherson.model.Cart;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-public interface CartRepository extends MongoRepository<Cart, String> {
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-    Optional<Cart> findByUserId(String userId);
+import com.motherson.model.CartItem;
+
+public interface CartRepository
+       extends MongoRepository<CartItem, String> {
+
+    Optional<CartItem> findByUserEmail(String userEmail);
+    long countByUserEmail(String userEmail);
 }

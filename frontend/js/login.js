@@ -31,12 +31,25 @@ async function login() {
         console.log("Response received");
 
         if(response.ok) {
+            const data =
+                await response.json();
+console.log("Login successful:", data);
+    localStorage.setItem(
+        "user",
+        JSON.stringify(data)
+    );
 
-            alert("Login Successful");
+    alert("Login Successful");
 
-            // redirect to products page
-            window.location.href = "products.html";
-        }
+    
+    // store login status
+    localStorage.setItem("isLoggedIn", "true");
+
+    // optional
+    localStorage.setItem("userEmail", email);
+
+    window.location.href = "products.html";
+}
         else {
 
             alert("Wrong Email or Password");

@@ -4,8 +4,11 @@ D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\model\Produc
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\model\User.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\service\AuthService.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\dto\RegisterRequest.java
+D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\model\WishlistItem.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\model\Cart.java
+D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\controller\CartController.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\model\OrderItem.java
+D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\config\CorsConfig.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\repository\CartRepository.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\repository\UserRepository.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\controller\AuthController.java
@@ -13,7 +16,9 @@ D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\controller\P
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\dto\LoginRequest.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\repository\OrderRepository.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\repository\ProductRepository.java
+D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\repository\WishlistRepository.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\config\SecurityConfig.java
+D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\controller\WishlistController.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\Application.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\model\CustomerDetails.java
 D:\Motherson\MothersonEcommerce\backend\src\main\java\com\motherson\dto\ApiResponse.java
