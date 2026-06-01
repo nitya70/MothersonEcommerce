@@ -105,5 +105,12 @@ async function updateWishlistCount(){
 
         console.log(error);
     }
+
+
     
+}
+function openOrdersPage(){
+
+    window.location.href =
+        "orders.html";
 }

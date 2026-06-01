@@ -122,4 +122,14 @@ public String decreaseQuantity(
 
         return "Removed";
     }
+    @DeleteMapping("/clear/{email}")
+public String clearCart(
+        @PathVariable String email){
+
+    cartRepository.deleteByUserEmail(
+            email
+    );
+
+    return "Cart Cleared";
+}
 }

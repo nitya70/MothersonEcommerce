@@ -424,5 +424,35 @@ function updateWishlistCount(){
             wishlist.length;
     }
 }
+
+async function buyNow(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const productId =
+        params.get("id");
+
+    const response =
+        await fetch(
+
+            `http://localhost:8080/products/${productId}`
+        );
+
+    const product =
+        await response.json();
+
+    localStorage.setItem(
+
+        "buyNowProduct",
+
+        JSON.stringify(product)
+    );
+
+    window.location.href =
+        "buy.html";
+}
 // LOAD PRODUCTS WHEN PAGE OPENS
 loadProducts();

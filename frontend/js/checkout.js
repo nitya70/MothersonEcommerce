@@ -1,56 +1,312 @@
-document.getElementById("checkoutForm")
-.addEventListener("submit", async function(e) {
+let orderItems = [];
+let grandTotal = 0;
 
-    e.preventDefault();
+async function loadCheckout(){
 
-    const userId = localStorage.getItem("userId");
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
 
-    const customerDetails = {
+    const mode =
+        params.get("mode");
 
-        fullName: document.getElementById("fullName").value,
+    console.log("Mode:", mode);
 
-        email: document.getElementById("email").value,
+    if(mode === "buyNow"){
 
-        phoneNumber: document.getElementById("phoneNumber").value,
+        loadBuyNowCheckout();
 
-        addressLine1: document.getElementById("addressLine1").value,
+        return;
+    }
 
-        city: document.getElementById("city").value,
+    loadCartCheckout();
+}
 
-        state: document.getElementById("state").value,
+async function loadCartCheckout(){
 
-        pincode: document.getElementById("pincode").value,
+    const user =
+        JSON.parse(
+            localStorage.getItem(
+                "user"
+            )
+        );
 
-        country: "India"
+    document.getElementById(
+        "address"
+    ).innerHTML = `
+
+        <h3>${user.name}</h3>
+
+        <p>${user.phone}</p>
+
+        <p>${user.address}</p>
+
+    `;
+
+    const response =
+        await fetch(
+
+            `http://localhost:8080/cart/${user.email}`
+        );
+
+    const cartItems =
+        await response.json();
+
+    const productsResponse =
+        await fetch(
+            "http://localhost:8080/products/all"
+        );
+
+    const products =
+        await productsResponse.json();
+
+    let totalItems = 0;
+    let productAmount = 0;
+
+    const container =
+        document.getElementById(
+            "orderSummary"
+        );
+
+    container.innerHTML = "";
+
+    cartItems.forEach(item => {
+
+        const product =
+            products.find(
+
+                p =>
+                String(p.productid)
+                ===
+                String(item.productId)
+            );
+
+        if(product){
+
+            totalItems +=
+                item.quantity;
+
+            productAmount +=
+
+                product.price *
+                item.quantity;
+
+            orderItems.push({
+
+                productId:
+                item.productId,
+
+                productName:
+                product.productname,
+
+                image:
+                product.image,
+
+                quantity:
+                item.quantity,
+
+                price:
+                product.price
+            });
+
+            container.innerHTML += `
+
+            <div>
+
+                ${product.productname}
+
+                x
+
+                ${item.quantity}
+
+            </div>
+            `;
+        }
+    });
+
+    grandTotal =
+        productAmount + 100;
+
+    document.getElementById(
+        "totalItems"
+    ).innerText =
+    totalItems;
+
+    document.getElementById(
+        "productAmount"
+    ).innerText =
+    productAmount;
+
+    document.getElementById(
+        "grandTotal"
+    ).innerText =
+    grandTotal;
+}
+
+function loadBuyNowCheckout(){
+
+    const user =
+        JSON.parse(
+            localStorage.getItem("user")
+        );
+
+    const item =
+        JSON.parse(
+            localStorage.getItem(
+                "buyNowOrder"
+            )
+        );
+
+    console.log(item);
+
+    if(!user || !item){
+
+        alert("Buy Now Data Missing");
+
+        return;
+    }
+
+    document.getElementById("name")
+        .innerText =
+        user.name;
+
+    document.getElementById("email")
+        .innerText =
+        user.email;
+
+    document.getElementById("phone")
+        .innerText =
+        user.phone;
+
+    document.getElementById("address")
+        .innerText =
+        user.address;
+
+    const container =
+        document.getElementById("items");
+
+    container.innerHTML = `
+
+    <div class="cart-item">
+
+        <img
+            src="${item.image}"
+            width="120">
+
+        <div>
+
+            <h3>
+                ${item.productName}
+            </h3>
+
+            <p>
+                ₹ ${item.price}
+            </p>
+
+            <p>
+                Quantity :
+                ${item.quantity}
+            </p>
+
+        </div>
+
+    </div>
+
+    `;
+
+    orderItems = [item];
+
+    const productAmount =
+
+        item.price *
+        item.quantity;
+
+    grandTotal =
+        productAmount + 100;
+
+    document.getElementById(
+        "totalItems"
+    ).innerText =
+    item.quantity;
+
+    document.getElementById(
+        "productAmount"
+    ).innerText =
+    productAmount;
+
+    document.getElementById(
+        "grandTotal"
+    ).innerText =
+    grandTotal;
+}
+
+async function placeOrder(){
+
+    const user =
+        JSON.parse(
+            localStorage.getItem(
+                "user"
+            )
+        );
+
+    const order = {
+
+        userEmail:
+        user.email,
+
+        customerName:
+        user.name,
+
+        phone:
+        user.phone,
+
+        address:
+        user.address,
+
+        items:
+        orderItems,
+
+        totalAmount:
+        grandTotal,
+
+        paymentMethod:
+        "COD"
     };
 
-    const paymentMethod =
-        document.getElementById("paymentMethod").value;
+    const response =
+        await fetch(
 
-    const response = await fetch(
-        "http://localhost:8080/orders/place",
-        {
+            "http://localhost:8080/orders/place",
 
-            method: "POST",
+            {
+                method:"POST",
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+                headers:{
+                    "Content-Type":
+                    "application/json"
+                },
 
-            body: JSON.stringify({
+                body:
+                JSON.stringify(order)
+            }
+        );
 
-                userId: userId,
+    if(response.ok){
 
-                customerDetails: customerDetails,
+        alert(
+            "Order Placed Successfully"
+        );
 
-                paymentMethod: paymentMethod
-            })
-        }
-    );
+        window.location.href =
+            "orders.html";
+    }
+    else{
 
-    const data = await response.json();
+        alert(
+            "Order Failed"
+        );
+    }
+}
 
-    alert("Order placed successfully");
-
-    window.location.href = "orders.html";
-});
+loadCheckout();

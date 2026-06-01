@@ -19,5 +19,9 @@ extends MongoRepository<CartItem,String>{
 
     void deleteByProductId(
             String productId
+            
     );
+        void deleteByUserEmail(
+                String userEmail
+        );
 }

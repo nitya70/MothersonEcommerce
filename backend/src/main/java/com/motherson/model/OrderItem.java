@@ -1,34 +1,12 @@
 package com.motherson.model;
 
-
 public class OrderItem {
 
     private String productId;
-
     private String productName;
-
+    private String image;
     private double price;
-
     private int quantity;
-
-    private String imageUrl;
-
-    private double subtotal;
-
-    public OrderItem() {
-    }
-
-    public OrderItem(String productId, String productName,
-                     double price, int quantity,
-                     String imageUrl, double subtotal) {
-
-        this.productId = productId;
-        this.productName = productName;
-        this.price = price;
-        this.quantity = quantity;
-        this.imageUrl = imageUrl;
-        this.subtotal = subtotal;
-    }
 
     public String getProductId() {
         return productId;
@@ -46,6 +24,14 @@ public class OrderItem {
         this.productName = productName;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -60,21 +46,5 @@ public class OrderItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
     }
 }
