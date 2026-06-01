@@ -34,7 +34,7 @@ async function loadProducts() {
 
             card.innerHTML = `
 
-    <div class="wishlist"
+    <div class="wishlist-icon"
          onclick="toggleWishlist('${product.productid}')">
 
          ${isWishlisted ? "❤️" : "🤍"}
@@ -97,8 +97,16 @@ async function loadProductDetails() {
 
         if (document.getElementById("description"))
             document.getElementById("description").innerText = product.description
+        if(document.getElementById("cartBtn")){
 
-    } catch (error) {
+    document.getElementById("cartBtn")
+    .onclick = function(){
+
+        addToCart(product.productid);
+    };
+}
+    } 
+    catch (error) {
         console.error("Error loading product:", error);
     }
 }
@@ -130,7 +138,7 @@ function searchProducts() {
 
     console.log(filteredProducts);
 
-    renderProducts(filteredProducts);
+    loadProducts(filteredProducts);
 }
 // FILTER PRODUCTS
 function filterProducts() {
@@ -165,7 +173,7 @@ function filterProducts() {
             );
     }
 
-    renderProducts(filteredProducts);
+    loadProducts(filteredProducts);
 }
 
 // SORT PRODUCTS
@@ -215,28 +223,60 @@ async function toggleWishlist(productid){
 
             productId: String(productid)
         };
+        console.log("Logged User:", user);
+        console.log("Email:", user.email);
 
-        await fetch(
+        const response =
+            await fetch(
 
-            "http://localhost:8080/wishlist/add",
+                "http://localhost:8080/wishlist/toggle",
 
-            {
-                method:"POST",
+                {
+                    method:"POST",
 
-                headers:{
-                    "Content-Type":
-                    "application/json"
-                },
+                    headers:{
+                        "Content-Type":
+                        "application/json"
+                    },
 
-                body:JSON.stringify(
-                    wishlistItem
-                )
-            }
+                    body:JSON.stringify(
+                        wishlistItem
+                    )
+                }
+            );
+
+        const message =
+            await response.text();
+
+        console.log(message);
+
+        // ONLY CHANGE UI
+        // BASED ON BACKEND RESPONSE
+
+        if(message === "Added"){
+
+            wishlist.push(
+                String(productid)
+            );
+        }
+        else if(message === "Removed"){
+
+            wishlist =
+                wishlist.filter(
+                    id =>
+                    id !== String(productid)
+                );
+        }
+
+        localStorage.setItem(
+            "wishlist",
+            JSON.stringify(wishlist)
         );
+
+        loadProducts();
 
         updateWishlistCount();
 
-        loadProducts();
     }
     catch(error){
 
@@ -244,10 +284,11 @@ async function toggleWishlist(productid){
     }
 }
 // ADD TO CART
-
 async function addToCart(productid){
 
     try{
+
+        console.log(productid);
 
         const user =
             JSON.parse(
@@ -256,70 +297,54 @@ async function addToCart(productid){
 
         if(!user){
 
-            alert("Please Login First");
+            alert("Please Login");
 
             return;
         }
-
-        /* SAVE IN LOCAL STORAGE */
-
-        let cart =
-            JSON.parse(
-                localStorage.getItem("cart")
-            ) || [];
-
-        cart.push(String(productid));
-
-        localStorage.setItem(
-            "cart",
-            JSON.stringify(cart)
-        );
-
-        /* UPDATE NAVBAR */
-
-        updateCartCount();
-
-        /* SAVE IN BACKEND */
 
         const cartItem = {
 
             userEmail: user.email,
 
-            productId: productid,
+            productId: String(productid),
 
-            quantity:1
+            quantity: 1
         };
 
-        const response = await fetch(
+        console.log(cartItem);
 
-            "http://localhost:8080/cart/add",
+       const response =
+await fetch(
+    "http://localhost:8080/cart/add",
+    {
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(cartItem)
+    }
+);
 
-            {
-                method:"POST",
+const message =
+await response.text();
 
-                headers:{
-                    "Content-Type":
-                    "application/json"
-                },
+if(message === "Already Exists"){
 
-                body:JSON.stringify(cartItem)
-            }
-        );
+    alert("Product already exists in cart");
 
-        if(!response.ok){
+    return;
+}
 
-            throw new Error(
-                "Failed To Add Cart"
-            );
-        }
+alert("Added To Cart");
 
-        alert("Product Added To Cart");
+updateCartCount();
     }
     catch(error){
 
-        console.log(error);
-
-        alert("Error Adding To Cart");
+        console.log(
+            "Cart Error:",
+            error
+        );
     }
 }
 
@@ -401,4 +426,3 @@ function updateWishlistCount(){
 }
 // LOAD PRODUCTS WHEN PAGE OPENS
 loadProducts();
-updateWishlistCount();

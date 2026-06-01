@@ -31,12 +31,8 @@ async function register() {
 
         console.log(data);
 
-        alert(data.message);
-
-        if (data.success) {
-            window.location.href = "login.html";
-        }
-
+        alert("Registration successful! ");
+        window.location.href = "login.html";
     } catch (error) {
 
         console.error("ERROR:", error);

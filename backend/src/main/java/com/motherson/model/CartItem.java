@@ -30,12 +30,12 @@ public class CartItem {
     }
 
     public String getProductId() {
-        return productId;
-    }
+    return productId;
+}
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
+public void setProductId(String productId) {
+    this.productId = productId;
+}
 
     public int getQuantity() {
         return quantity;

@@ -12,6 +12,9 @@ function toggleProfileMenu(){
         menu.style.display = "block";
     }
 }
+window.openWishlistPage = function () {
+    window.location.href = "wishlist.html";
+};
 
 function openProfilePage(){
 
@@ -63,15 +66,7 @@ async function updateCartCount(){
 
         document.getElementById(
             "cartCount"
-        ).innerText = cartCount;
-
-        /* WISHLIST COUNT */
-
-        const wishlistResponse =
-            await fetch(
-
-                `http://localhost:8080/wishlist/count/${user.email}`
-            );
+        ).innerText = cartCount;    
 
     }
     catch(error){
@@ -110,4 +105,5 @@ async function updateWishlistCount(){
 
         console.log(error);
     }
+    
 }

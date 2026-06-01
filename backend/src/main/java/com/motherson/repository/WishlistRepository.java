@@ -1,25 +1,26 @@
 package com.motherson.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import com.motherson.model.WishlistItem;
 
+@Repository
 public interface WishlistRepository
-        extends MongoRepository<WishlistItem, String>{
+extends MongoRepository<WishlistItem,String>{
 
-    long countByUserEmail(
-            String userEmail);
-
-    List<WishlistItem>
-        findByUserEmail(
-            String userEmail);
-
-    Optional<WishlistItem>
-        findByUserEmailAndProductId(
+    WishlistItem findByUserEmailAndProductId(
             String userEmail,
             String productId
-        );
+    );
+
+    List<WishlistItem> findByUserEmail(
+            String userEmail
+    );
+
+    long countByUserEmail(
+            String userEmail
+    );
 }

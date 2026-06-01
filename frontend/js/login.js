@@ -36,7 +36,7 @@ async function login() {
 console.log("Login successful:", data);
     localStorage.setItem(
         "user",
-        JSON.stringify(data)
+        JSON.stringify(data.user)
     );
 
     alert("Login Successful");
