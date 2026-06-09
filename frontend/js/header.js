@@ -114,3 +114,33 @@ function openOrdersPage(){
     window.location.href =
         "orders.html";
 }
+async function updateOrderCount(){
+
+    const user =
+        JSON.parse(
+            localStorage.getItem("user")
+        );
+
+    if(!user){
+        return;
+    }
+
+    try{
+
+        const response =
+            await fetch(
+                `http://localhost:8080/orders/count/${user.email}`
+            );
+
+        const count =
+            await response.text();
+
+        document.getElementById(
+            "ordersCount"
+        ).innerText = count;
+    }
+    catch(error){
+
+        console.log(error);
+    }
+}

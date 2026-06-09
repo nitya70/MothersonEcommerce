@@ -1,7 +1,10 @@
 com\motherson\controller\ProductController.class
+com\motherson\controller\CartController.class
 com\motherson\config\CorsConfig.class
+com\motherson\controller\WishlistController.class
 com\motherson\model\Cart.class
 com\motherson\dto\ApiResponse.class
+com\motherson\controller\OrderController.class
 com\motherson\model\CartItem.class
 com\motherson\config\SecurityConfig.class
 com\motherson\dto\RegisterRequest.class
@@ -9,6 +12,7 @@ com\motherson\model\Product.class
 com\motherson\model\CustomerDetails.class
 com\motherson\repository\CartRepository.class
 com\motherson\service\AuthService.class
+com\motherson\model\WishlistItem.class
 com\motherson\model\OrderItem.class
 com\motherson\repository\OrderRepository.class
 com\motherson\Application.class
@@ -18,4 +22,5 @@ com\motherson\repository\ProductRepository.class
 com\motherson\config\CorsConfig$1.class
 com\motherson\repository\UserRepository.class
 com\motherson\controller\AuthController.class
+com\motherson\repository\WishlistRepository.class
 com\motherson\model\User.class

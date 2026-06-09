@@ -27,26 +27,23 @@ async function loadCartCheckout(){
 
     const user =
         JSON.parse(
-            localStorage.getItem(
-                "user"
-            )
+            localStorage.getItem("user")
         );
 
-    document.getElementById(
-        "address"
-    ).innerHTML = `
+    document.getElementById("name")
+        .innerText = user.name;
 
-        <h3>${user.name}</h3>
+    document.getElementById("email")
+        .innerText = user.email;
 
-        <p>${user.phone}</p>
+    document.getElementById("phone")
+        .innerText = user.phone;
 
-        <p>${user.address}</p>
-
-    `;
+    document.getElementById("address")
+        .innerText = user.address;
 
     const response =
         await fetch(
-
             `http://localhost:8080/cart/${user.email}`
         );
 
@@ -61,88 +58,108 @@ async function loadCartCheckout(){
     const products =
         await productsResponse.json();
 
-    let totalItems = 0;
-    let productAmount = 0;
-
     const container =
-        document.getElementById(
-            "orderSummary"
-        );
+        document.getElementById("items");
 
     container.innerHTML = "";
 
-    cartItems.forEach(item => {
+    let totalItems = 0;
+    let productAmount = 0;cartItems.forEach(item => {
 
-        const product =
-            products.find(
+    const product =
+        products.find(
 
-                p =>
-                String(p.productid)
-                ===
-                String(item.productId)
-            );
+            p =>
+            String(p.productid) ===
+            String(item.productId)
+        );
 
-        if(product){
+    if(product){
 
-            totalItems +=
-                item.quantity;
+        totalItems += item.quantity;
 
-            productAmount +=
+        productAmount +=
+            product.price *
+            item.quantity;
 
-                product.price *
-                item.quantity;
+        orderItems.push({
 
-            orderItems.push({
-
-                productId:
+            productId:
                 item.productId,
 
-                productName:
+            productName:
                 product.productname,
 
-                image:
+            image:
                 product.image,
 
-                quantity:
+            quantity:
                 item.quantity,
 
-                price:
+            price:
                 product.price
-            });
+        });
 
-            container.innerHTML += `
+        container.innerHTML += `
+
+        <div class="cart-item">
+
+            <img
+                src="${product.image}"
+                width="120">
 
             <div>
 
-                ${product.productname}
+                <h3>
+                    ${product.productname}
+                </h3>
 
-                x
+                <p>
+                    ₹ ${product.price}
+                </p>
 
-                ${item.quantity}
+                <p>
+                    Quantity :
+                    ${item.quantity}
+                </p>
 
             </div>
-            `;
-        }
-    });
 
-    grandTotal =
-        productAmount + 100;
+        </div>
+        `;
+    }
+});
 
-    document.getElementById(
-        "totalItems"
-    ).innerText =
+grandTotal =
+    productAmount + 100;
+
+document.getElementById(
+    "totalItems"
+).innerText =
     totalItems;
 
-    document.getElementById(
-        "productAmount"
-    ).innerText =
+document.getElementById(
+    "productAmount"
+).innerText =
     productAmount;
 
-    document.getElementById(
-        "grandTotal"
-    ).innerText =
+document.getElementById(
+    "grandTotal"
+).innerText =
     grandTotal;
+if(response.ok){
+
+    alert(
+        "Order Placed Successfully"
+    );
+
+    updateOrderCount();
+
+    window.location.href =
+        "orders.html";
 }
+}
+
 
 function loadBuyNowCheckout(){
 

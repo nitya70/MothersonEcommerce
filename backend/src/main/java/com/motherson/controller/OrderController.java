@@ -29,6 +29,15 @@ public class OrderController {
     public List<Order> getOrders(
             @PathVariable String email){
 
-        return orderRepository.findByUserEmail(email);
+        return orderRepository
+                .findByUserEmail(email);
+    }
+
+    @GetMapping("/count/{email}")
+    public long getOrderCount(
+            @PathVariable String email){
+
+        return orderRepository
+                .countByUserEmail(email);
     }
 }
